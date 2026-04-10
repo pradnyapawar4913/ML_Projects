@@ -34,10 +34,15 @@ def predict_datapoint():
         pred_df = data.get_data_as_data_frame()
         print(pred_df)
 
-        predict_pipeline = PredictPipeline()
-        results = predict_pipeline.predict(pred_df)
+        try:
+            predict_pipeline = PredictPipeline()
+            results = predict_pipeline.predict(pred_df)
+            return render_template('home.html', results=float(results[0]))
 
-        return render_template('home.html', results=float(results[0]))
+        except Exception as e:
+           return f"ERROR: {str(e)}"
+
+        # return render_template('home.html', results=float(results[0]))
     
 import os
 
